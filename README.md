@@ -1,7 +1,7 @@
 # Pagination
  a paging widget based on Qt
 
-### Usage
+### Usage Demo
 ```
 auto widget = new QWidget(this);
 widget->setGeometry(0, 0, 560, 50);
