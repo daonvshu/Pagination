@@ -1,7 +1,7 @@
 # Pagination
  a paging widget based on Qt
 
-###Usage
+### Usage
 ```
 auto pagination = new Pagination(parent);
 auto value = new QLabel(parent);
