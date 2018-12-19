@@ -74,6 +74,7 @@ Pagination::Pagination(QWidget* parent) : QWidget(parent) {
 	auto pageEditor = new QLineEdit(this);
 	pageEditor->setStyleSheet("border:1px solid #636363;background:transparent;margin-left:8px;padding-left:2px;padding-rigth:2px;");
 	pageEditor->setMinimumWidth(38);
+	pageEditor->setMaximumWidth(38);
 	pageEditor->setValidator(new QRegExpValidator(QRegExp("\\d{3}"), this));
 	hbox->addWidget(pageEditor);
 
