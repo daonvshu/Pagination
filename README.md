@@ -2,7 +2,7 @@
  a paging widget based on Qt
 
 ### Usage Demo
-```
+``` c++
 auto widget = new QWidget(this);
 widget->setGeometry(0, 0, 560, 50);
 
