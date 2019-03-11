@@ -106,6 +106,10 @@ void Pagination::setTotalSize(int size) {
 	btnValue[11] = totalSize - 1;
 	btnValue[12] = totalSize;
 
+	for (int i = 0; i < 13; i++) {
+		btn[i]->setVisible(true);
+	}
+
 	clicked(0);
 }
 
