@@ -11,6 +11,8 @@ public:
 	~Pagination();
 
 	void setTotalSize(int size);
+	int currentPage();
+    void setCurrent(int btnIndex);
 
 signals:
 	void selectPage(int value);

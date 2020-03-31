@@ -9,7 +9,7 @@
 
 #define USE_GOTO_PAGE
 
-Pagination::Pagination(QWidget* parent) : QWidget(parent) {
+Pagination::Pagination(QWidget* parent) : QWidget(parent), totalSize(0), lastValue(0) {
 	setStyleSheet("Pagination{background:#b4b4b4;border:none;border-radius:5px;}"
 		".QPushButton{background:transparent;border:none;font-size:12px;} .QPushButton:hover{background:#bfbfbf;}");
 	setMinimumHeight(30);
@@ -102,6 +102,9 @@ Pagination::~Pagination() {
 }
 
 void Pagination::setTotalSize(int size) {
+	if (this->totalSize == size) {
+        return;
+    }
 	this->totalSize = size;
 	btnValue[11] = totalSize - 1;
 	btnValue[12] = totalSize;
@@ -110,7 +113,7 @@ void Pagination::setTotalSize(int size) {
 		btn[i]->setVisible(true);
 	}
 
-	clicked(0);
+	clickedValue(lastValue);
 }
 
 void Pagination::clicked(int btnIndex) {
@@ -119,6 +122,20 @@ void Pagination::clicked(int btnIndex) {
 	QMouseEvent event(QEvent::Leave, QPointF(), Qt::LeftButton, 0, 0);
 	QApplication::sendEvent(btn[btnIndex], &event);
 	clickedValue(curValue);
+	if (lastValue != curValue) {//避免发送重复值
+        lastValue = curValue;
+        emit selectPage(curValue);
+    }
+}
+
+int Pagination::currentPage() {
+    return btnValue[lastValue];
+}
+
+void Pagination::setCurrent(int btnIndex) {
+    int curValue = btnValue[btnIndex];//选中值
+    clickedValue(curValue);
+    lastValue = btnIndex;
 }
 
 void Pagination::clickedValue(int curValue) {
@@ -170,11 +187,6 @@ void Pagination::clickedValue(int curValue) {
 			btn[i]->setStyleSheet("color:black;");
 		}
 	}
-
-	if (lastValue != curValue) {//避免发送重复值
-		lastValue = curValue;
-		emit selectPage(curValue);
-	}
 }
 
 void Pagination::gotoPage(int pageValue) {
@@ -187,6 +199,10 @@ void Pagination::gotoPage(int pageValue) {
 		}
 	}
 	clickedValue(pageValue);
+	if (lastValue != pageValue) {//避免发送重复值
+        lastValue = pageValue;
+        emit selectPage(pageValue);
+    }
 }
 
 void Pagination::paintEvent(QPaintEvent *) {
