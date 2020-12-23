@@ -11,6 +11,7 @@ public:
 	~Pagination();
 
 	void setTotalSize(int size);
+	void setTotalSize(int dataSize, int perSize);
 	int currentPage();
     void setCurrent(int btnIndex);
 

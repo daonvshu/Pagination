@@ -9,7 +9,7 @@
 
 #define USE_GOTO_PAGE
 
-Pagination::Pagination(QWidget* parent) : QWidget(parent), totalSize(0), lastValue(0) {
+Pagination::Pagination(QWidget* parent) : QWidget(parent), totalSize(0), lastValue(1) {
 	setStyleSheet("Pagination{background:#b4b4b4;border:none;border-radius:5px;}"
 		".QPushButton{background:transparent;border:none;font-size:12px;} .QPushButton:hover{background:#bfbfbf;}");
 	setMinimumHeight(30);
@@ -72,9 +72,9 @@ Pagination::Pagination(QWidget* parent) : QWidget(parent), totalSize(0), lastVal
 
 #ifdef USE_GOTO_PAGE
 	auto pageEditor = new QLineEdit(this);
-	pageEditor->setStyleSheet("border:1px solid #636363;background:transparent;margin-left:8px;padding-left:2px;padding-rigth:2px;");
-	pageEditor->setMinimumWidth(38);
-	pageEditor->setMaximumWidth(38);
+	pageEditor->setStyleSheet("border:1px solid #636363;background:transparent;margin-left:8px;margin-right:4px;padding-left:2px;padding-rigth:2px;");
+	pageEditor->setFixedSize(46, 20);
+	pageEditor->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 	pageEditor->setValidator(new QRegExpValidator(QRegExp("\\d{3}"), this));
 	hbox->addWidget(pageEditor);
 
@@ -95,6 +95,8 @@ Pagination::Pagination(QWidget* parent) : QWidget(parent), totalSize(0), lastVal
 
 	btn[2]->setText("...");
 	btn[10]->setText("...");
+
+	setTotalSize(1);
 }
 
 
@@ -114,6 +116,20 @@ void Pagination::setTotalSize(int size) {
 	}
 
 	clickedValue(lastValue);
+}
+
+void Pagination::setTotalSize(int dataSize, int perSize) {
+	int pageSize = 1;
+	if (perSize != 0) {
+		pageSize = dataSize / perSize;
+		if (dataSize % perSize) {
+			pageSize++;
+		}
+	}
+	if (pageSize == 0) {
+		pageSize = 1;
+	}
+	setTotalSize(pageSize);
 }
 
 void Pagination::clicked(int btnIndex) {
