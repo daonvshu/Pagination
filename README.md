@@ -22,7 +22,7 @@ connect(pagination, &Pagination::selectPage, [=](int value) {
 pagination->setTotalSize(20);
 ```
 
-![image](https://github.com/daonvshu/Pagination/blob/master/demo.png?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/demo.png?raw=true)
 
 ### qml
 ```
@@ -44,4 +44,4 @@ Rectangle {
 	}
 }
 ```
-![image](https://github.com/daonvshu/Pagination/blob/master/demo2.png?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/demo2.png?raw=true)
