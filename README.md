@@ -97,6 +97,9 @@ Pagination>QPushButton:pressed{
 	color:white;
 	background:#0073A9;
 }
+
+/*your parent widget stylesheet:*/
+background:#dce0e0;
 ```
 ![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p3.gif?raw=true)
 
