@@ -1,28 +1,104 @@
 # Pagination
  a paging widget based on Qt
 
-### Usage Demo
-``` c++
-auto widget = new QWidget(this);
-widget->setGeometry(0, 0, 560, 50);
-
-auto hbox = new QHBoxLayout(widget);
-hbox->addItem(new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Preferred));
-
-auto pagination = new Pagination(widget);
-hbox->addWidget(pagination);
-
-auto text = new QLabel(this);
-text->setGeometry(120, 50, 40, 20);
-
-connect(pagination, &Pagination::selectPage, [=](int value) {
-	text->setText(QString::number(value));
-});
-
-pagination->setTotalSize(20);
+### stylesheet demo
 ```
+Pagination{
+	font-size:16px;
+	font-family:"Microsoft YaHei UI";
+	padding:8px;
 
-![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/demo.png?raw=true)
+	qproperty-spacing: 6;
+	qproperty-totalsize: 46;
+	qproperty-sizeofperpage: 2;
+}
+
+Pagination>QPushButton{
+	border-radius:4px;
+	color:#666;
+	background:white;
+}
+
+Pagination>QPushButton:disabled{
+	color:#666;
+	background:transparent;
+}
+
+Pagination>QPushButton:hover{
+	color:white;
+	background:#86EDD9;
+}
+
+Pagination>QPushButton:selected{
+	color:white;
+	background:#1ABC9C;
+}
+
+Pagination>QPushButton:pressed{
+	color:white;
+	background:#1ABC9C;
+}
+```
+![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p1.gif?raw=true)
+
+```
+Pagination{
+	font-size:16px;
+	font-family:"Microsoft YaHei UI";
+	padding:8px;
+
+	qproperty-spacing: 6;
+	qproperty-totalsize: 46;
+	qproperty-sizeofperpage: 2;
+	qproperty-pageUpText: "上一页";
+	qproperty-pageDownText: "下一页";
+}
+Pagination>QPushButton{
+	border:1px solid #dce0e0;
+	color:#666;
+	background:white;
+}
+Pagination>QPushButton:selected{
+	color:white;
+	background:#0073A9;
+}
+Pagination>QPushButton:pressed{
+	color:white;
+	background:#0073A9;
+}
+```
+![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p2.gif?raw=true)
+
+```
+Pagination{
+	font-size:16px;
+	font-family:"Microsoft YaHei UI";
+	padding:8px;
+
+	qproperty-spacing: 1;
+	qproperty-totalsize: 46;
+	qproperty-sizeofperpage: 2;
+	qproperty-pageUpText: "上一页";
+	qproperty-pageDownText: "下一页";
+}
+Pagination>QPushButton{
+	color:#666;
+	background:white;
+	border:none;
+}
+Pagination>QPushButton:hover{
+	color:#0073A9;
+}
+Pagination>QPushButton:selected{
+	color:white;
+	background:#0073A9;
+}
+Pagination>QPushButton:pressed{
+	color:white;
+	background:#0073A9;
+}
+```
+![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p3.gif?raw=true)
 
 ### qml
 ```
@@ -44,4 +120,4 @@ Rectangle {
 	}
 }
 ```
-![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/demo2.png?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/demo2.png?raw=true)
