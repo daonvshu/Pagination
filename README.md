@@ -39,7 +39,7 @@ Pagination>QPushButton:pressed{
 	background:#1ABC9C;
 }
 ```
-![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p1.gif?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/p1.gif?raw=true)
 
 ```
 Pagination{
@@ -67,7 +67,7 @@ Pagination>QPushButton:pressed{
 	background:#0073A9;
 }
 ```
-![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p2.gif?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/p2.gif?raw=true)
 
 ```
 Pagination{
@@ -101,7 +101,7 @@ Pagination>QPushButton:pressed{
 /*your parent widget stylesheet:*/
 background:#dce0e0;
 ```
-![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/p3.gif?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/p3.gif?raw=true)
 
 ### qml
 ```
@@ -123,4 +123,4 @@ Rectangle {
 	}
 }
 ```
-![image](https://github.com/daonvshu/Pagination/blob/rewrite/screenshot/demo2.png?raw=true)
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/demo2.png?raw=true)
