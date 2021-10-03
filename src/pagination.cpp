@@ -23,6 +23,8 @@ Pagination::Pagination(QWidget* parent)
 
     pushButton->setVisible(false);
 
+    lastSelectedIndex = pagingUtil.getCurrentSelectedNumber() - 1;
+
     connect(&pagingUtil, &PagingUtil::numberArraySizeChanged, [&] {
         updateGeometry();
     });
@@ -32,7 +34,11 @@ Pagination::Pagination(QWidget* parent)
     });
 
     connect(&pagingUtil, &PagingUtil::numberSelectChanged, [&] {
-        emit pageIndexChanged(pagingUtil.getCurrentSelectedNumber() - 1);
+        auto index = pagingUtil.getCurrentSelectedNumber() - 1;
+        if (lastSelectedIndex != index) {
+            lastSelectedIndex = index;
+            emit pageIndexChanged(index);
+        }
     });
 }
 

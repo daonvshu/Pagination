@@ -71,6 +71,8 @@ protected:
 protected:
     PagingUtil pagingUtil;
 
+    int lastSelectedIndex;
+
     int boxSpacing;
 
     bool pageUpEnable, pageDownEnable;
