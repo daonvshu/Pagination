@@ -6,49 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>658</width>
-    <height>394</height>
+    <width>778</width>
+    <height>472</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background:#F5F5F5;</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="Pagination" name="widget" native="true">
-       <property name="styleSheet">
-        <string notr="true">Pagination{
-font-size:14px;
-padding:8px;
-
-qproperty-spacing: 6;
-qproperty-totalsize: 46;
-qproperty-sizeofperpage: 2;
-}
-Pagination&gt;QPushButton{
-border:1px solid green;
-border-radius:4px;
-color:#00EA42;
-background:#475466;
-}
-Pagination&gt;QPushButton:hover{
-color:red;
-background:#353F4C;
-border-color:yellow;
-}
-Pagination&gt;QPushButton:selected{
-color:red;
-background:#242A33;
-}
-Pagination&gt;QPushButton:pressed{
-color:red;
-background:#242A33;
-}</string>
-       </property>
-      </widget>
-     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -62,37 +32,259 @@ background:#242A33;
        </property>
       </spacer>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="Pagination" name="pagination">
+       <property name="styleSheet">
+        <string notr="true">Pagination{
+font-size:16px;
+font-family:&quot;Microsoft YaHei UI&quot;;
+padding:8px;
+
+qproperty-spacing: 6;
+qproperty-totalsize: 46;
+qproperty-sizeofperpage: 2;
+}
+Pagination&gt;QPushButton{
+border-radius:4px;
+color:#666;
+background:white;
+}
+Pagination&gt;QPushButton:disabled{
+color:#666;
+background:transparent;
+}
+Pagination&gt;QPushButton:hover{
+color:white;
+background:#86EDD9;
+}
+Pagination&gt;QPushButton:selected{
+color:white;
+background:#1ABC9C;
+}
+Pagination&gt;QPushButton:pressed{
+color:white;
+background:#1ABC9C;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:#666;
+border-color:#666;</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="pushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{
-border:none;
 border-radius:4px;
-color:white;
-background:#475466;
+color:#666;
+background:white;
+padding:12px;
 }
 QPushButton:hover{
-color:red;
-background:#353F4C;
+color:white;
+background:#86EDD9;
 }
-QPushButton:selected{
-color:red;
-background:#242A33;
+QPushButton:pressed{
+color:white;
+background:#1ABC9C;
 }</string>
        </property>
        <property name="text">
-        <string>PushButton</string>
-       </property>
-       <property name="autoDefault">
-        <bool>true</bool>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
+        <string>转到</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="Pagination" name="pagination_2">
+       <property name="styleSheet">
+        <string notr="true">Pagination{
+font-size:16px;
+font-family:&quot;Microsoft YaHei UI&quot;;
+padding:8px;
+
+qproperty-spacing: 6;
+qproperty-totalsize: 46;
+qproperty-sizeofperpage: 2;
+qproperty-pageUpText: &quot;上一页&quot;;
+qproperty-pageDownText: &quot;下一页&quot;;
+}
+Pagination&gt;QPushButton{
+border:1px solid #dce0e0;
+color:#666;
+background:white;
+}
+Pagination&gt;QPushButton:selected{
+color:white;
+background:#0073A9;
+}
+Pagination&gt;QPushButton:pressed{
+color:white;
+background:#0073A9;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="QWidget" name="widget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background:#dce0e0;</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="leftMargin">
+         <number>1</number>
+        </property>
+        <property name="topMargin">
+         <number>1</number>
+        </property>
+        <property name="rightMargin">
+         <number>1</number>
+        </property>
+        <property name="bottomMargin">
+         <number>1</number>
+        </property>
+        <item>
+         <widget class="Pagination" name="pagination_3">
+          <property name="styleSheet">
+           <string notr="true">Pagination{
+font-size:16px;
+font-family:&quot;Microsoft YaHei UI&quot;;
+padding:8px;
+
+qproperty-spacing: 1;
+qproperty-totalsize: 46;
+qproperty-sizeofperpage: 2;
+qproperty-pageUpText: &quot;上一页&quot;;
+qproperty-pageDownText: &quot;下一页&quot;;
+}
+Pagination&gt;QPushButton{
+color:#666;
+background:white;
+border:none;
+}
+Pagination&gt;QPushButton:hover{
+color:#0073A9;
+}
+Pagination&gt;QPushButton:selected{
+color:white;
+background:#0073A9;
+}
+Pagination&gt;QPushButton:pressed{
+color:white;
+background:#0073A9;
+}</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -114,8 +306,8 @@ background:#242A33;
  <customwidgets>
   <customwidget>
    <class>Pagination</class>
-   <extends>QWidget</extends>
-   <header>pagination.h</header>
+   <extends>QFrame</extends>
+   <header>Pagination.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

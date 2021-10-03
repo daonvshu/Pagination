@@ -308,7 +308,8 @@ void Pagination::drawEllipsis(const QRect& rect, int number, QPainter* painter) 
     opt.initFrom(pushButton);
     opt.text = numberFormat(number);
     opt.rect = rect;
-    style()->drawControl(QStyle::CE_PushButtonLabel, &opt, painter, pushButton);
+    opt.state.setFlag(QStyle::State_Enabled, false);
+    style()->drawControl(QStyle::CE_PushButton, &opt, painter, pushButton);
 }
 
 void Pagination::drawPageUpBtn(const QRect& rect, QPainter* painter) {
@@ -355,7 +356,7 @@ int Pagination::getPageUpBtnWidth() const {
     getContentsMargins(&l, &t, &r, &b);
 
     auto met = fontMetrics();
-    return qMax(t + b + met.height(), met.width(pageUpText));
+    return qMax(t + b + met.height(), met.width(pageUpText) + l + r);
 }
 
 int Pagination::getPageDownBtnWidth() const {
@@ -367,5 +368,5 @@ int Pagination::getPageDownBtnWidth() const {
     getContentsMargins(&l, &t, &r, &b);
 
     auto met = fontMetrics();
-    return qMax(t + b + met.height(), met.width(pageDownText));
+    return qMax(t + b + met.height(), met.width(pageDownText) + l + r);
 }
