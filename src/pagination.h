@@ -89,4 +89,6 @@ private:
 
     int getPageUpBtnWidth() const;
     int getPageDownBtnWidth() const;
+
+    int centerTop(int boxHeight) const;
 };

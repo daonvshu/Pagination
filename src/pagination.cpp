@@ -165,6 +165,7 @@ bool Pagination::event(QEvent* e) {
         }
 
         auto boxSize = getBoxSize();
+        auto top = centerTop(boxSize.height());
 
         hoverNumber = -1;
 
@@ -173,7 +174,7 @@ bool Pagination::event(QEvent* e) {
             if (pageUpBtnWidth != 0) {
                 auto boxRect = QRect(
                     0,
-                    0,
+                    top,
                     pageUpBtnWidth,
                     boxSize.height()
                 );
@@ -196,7 +197,7 @@ bool Pagination::event(QEvent* e) {
             if (pageDownBtnWidth != 0) {
                 auto boxRect = QRect(
                     getPageUpBtnWidth() + boxSpacing + (boxSize.width() + boxSpacing) * numbers.size(),
-                    0,
+                    top,
                     pageDownBtnWidth,
                     boxSize.height()
                 );
@@ -217,7 +218,7 @@ bool Pagination::event(QEvent* e) {
 
                 auto boxRect = QRect(
                     pageUpBtnWidth + boxSpacing + (boxSize.width() + boxSpacing) * i,
-                    0,
+                    top,
                     boxSize.width(),
                     boxSize.height()
                 );
@@ -244,6 +245,7 @@ void Pagination::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
 
     auto boxSize = getBoxSize();
+    auto top = centerTop(boxSize.height());
 
     auto numbers = pagingUtil.getCurCacheNumbers();
 
@@ -251,7 +253,7 @@ void Pagination::paintEvent(QPaintEvent* event) {
     if (pageUpBtnWidth != 0) {
         auto boxRect = QRect(
             0,
-            0,
+            top,
             pageUpBtnWidth,
             boxSize.height()
         );
@@ -263,7 +265,7 @@ void Pagination::paintEvent(QPaintEvent* event) {
         
         auto boxRect = QRect(
             pageUpBtnWidth + boxSpacing + (boxSize.width() + boxSpacing) * i,
-            0,
+            top,
             boxSize.width(),
             boxSize.height()
         );
@@ -280,7 +282,7 @@ void Pagination::paintEvent(QPaintEvent* event) {
     if (pageDownBtnWidth != 0) {
         auto boxRect = QRect(
             getPageUpBtnWidth() + boxSpacing + (boxSize.width() + boxSpacing) * numbers.size(),
-            0,
+            top,
             pageDownBtnWidth,
             boxSize.height()
         );
@@ -375,4 +377,8 @@ int Pagination::getPageDownBtnWidth() const {
 
     auto met = fontMetrics();
     return qMax(t + b + met.height(), met.width(pageDownText) + l + r);
+}
+
+int Pagination::centerTop(int boxHeight) const {
+    return (height() - boxHeight) / 2;
 }
