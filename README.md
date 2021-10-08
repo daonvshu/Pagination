@@ -103,6 +103,31 @@ background:#dce0e0;
 ```
 ![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/p3.gif?raw=true)
 
+### paging style
+```cpp
+pagination->setPagingStyle(new PagingStyle2);
+```
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/p4.gif?raw=true)
+  
+customize your own paging style
+```cpp
+#include "pagingutil.h"
+
+class MyPagingStyle : public PagingUtil {
+public:
+	using PagingUtil::PagingUtil;
+
+	void reCacheNumbers() override {
+		curCacheNumbers.clear();
+		//do your own paging cache here
+	}
+}
+
+//then..
+pagination->setPagingStyle(new MyPagingStyle);
+```
+Note: The `curCacheNumbers` stored numbers for display, or -1 if it's an ellipsis
+
 ### qml
 ```
 Rectangle {
