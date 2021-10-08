@@ -17,6 +17,11 @@ add_library(${PROJECT_NAME}
 
     pagingutil.h
     pagingutil.cpp
+
+    pagingstyle1.h
+    pagingstyle1.cpp
+    pagingstyle2.h
+    pagingstyle2.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

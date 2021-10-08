@@ -20,6 +20,7 @@ class Pagination : public QFrame {
 
 public:
     explicit Pagination(QWidget* parent = nullptr);
+    ~Pagination();
 
     int getBoxSpacing() const;
     void setBoxSpacing(int spacing);
@@ -41,6 +42,8 @@ public:
 
     QString getPageDownText() const;
     void setPageDownText(const QString& text);
+
+    void setPagingStyle(PagingUtil* pagingStyle);
 
     void setCurrentPage(int number);
 
@@ -69,7 +72,7 @@ protected:
     virtual void drawPageDownBtn(const QRect& rect, QPainter* painter);
 
 protected:
-    PagingUtil pagingUtil;
+    PagingUtil* pagingStyle;
 
     int lastSelectedIndex;
 

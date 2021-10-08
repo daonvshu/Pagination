@@ -7,6 +7,7 @@ class PagingUtil : public QObject {
 
 public:
     PagingUtil(QObject* parent = nullptr);
+    virtual ~PagingUtil();
 
     int getTotalSize() const;
     void setTotalSize(int size);
@@ -16,7 +17,7 @@ public:
 
     void numberSelected(int number);
 
-    void reCacheNumbers();
+    virtual void reCacheNumbers() = 0;
 
     bool isSelectedNumber(int number) const;
 
@@ -35,7 +36,7 @@ signals:
     void numbersChanged();
     void numberSelectChanged();
 
-private:
+protected:
     //total data size
     int totalSize;
     //max number of pages to display
@@ -45,4 +46,7 @@ private:
 
     //current display numbers
     QList<int> curCacheNumbers;
+
+private:
+    void pre2ReCacheNumbers();
 };

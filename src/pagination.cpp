@@ -1,5 +1,7 @@
 #include "pagination.h"
 
+#include "pagingstyle1.h"
+
 #include <qcoreevent.h>
 #include <qvariant.h>
 #include <qstyle.h>
@@ -9,6 +11,7 @@
 
 Pagination::Pagination(QWidget* parent)
     : QFrame(parent)
+    , pagingStyle(nullptr)
     , boxSpacing(0)
     , pageUpEnable(true)
     , pageDownEnable(true)
@@ -23,23 +26,11 @@ Pagination::Pagination(QWidget* parent)
 
     pushButton->setVisible(false);
 
-    lastSelectedIndex = pagingUtil.getCurrentSelectedNumber() - 1;
+    setPagingStyle(new PagingStyle1);
+}
 
-    connect(&pagingUtil, &PagingUtil::numberArraySizeChanged, [&] {
-        updateGeometry();
-    });
-
-    connect(&pagingUtil, &PagingUtil::numbersChanged, [&] {
-        update();
-    });
-
-    connect(&pagingUtil, &PagingUtil::numberSelectChanged, [&] {
-        auto index = pagingUtil.getCurrentSelectedNumber() - 1;
-        if (lastSelectedIndex != index) {
-            lastSelectedIndex = index;
-            emit pageIndexChanged(index);
-        }
-    });
+Pagination::~Pagination() {
+    delete pagingStyle;
 }
 
 int Pagination::getBoxSpacing() const {
@@ -52,20 +43,20 @@ void Pagination::setBoxSpacing(int spacing) {
 }
 
 int Pagination::getTotalSize() const {
-    return pagingUtil.getTotalSize();
+    return pagingStyle->getTotalSize();
 }
 
 void Pagination::setTotalSize(int size) {
-    pagingUtil.setTotalSize(size);
+    pagingStyle->setTotalSize(size);
 }
 
 int Pagination::getSizeofPerPage() const {
-    return pagingUtil.getSizeofPerPage();
+    return pagingStyle->getSizeofPerPage();
 }
 
 void Pagination::setSizeofPerPage(int size) {
     Q_ASSERT(size > 0);
-    pagingUtil.setSizeofPerPage(size);
+    pagingStyle->setSizeofPerPage(size);
 }
 
 bool Pagination::isPageUpEnabled() const {
@@ -105,25 +96,47 @@ void Pagination::setPageDownText(const QString& text) {
 }
 
 
+void Pagination::setPagingStyle(PagingUtil* pagingStyle) {
+    delete this->pagingStyle;
+    this->pagingStyle = pagingStyle;
+
+    connect(pagingStyle, &PagingUtil::numberArraySizeChanged, [&] {
+        updateGeometry();
+    });
+
+    connect(pagingStyle, &PagingUtil::numbersChanged, [&] {
+        update();
+    });
+
+    connect(pagingStyle, &PagingUtil::numberSelectChanged, [&] {
+        auto index = this->pagingStyle->getCurrentSelectedNumber() - 1;
+        if (lastSelectedIndex != index) {
+            lastSelectedIndex = index;
+            emit pageIndexChanged(index);
+        }
+    });
+
+    lastSelectedIndex = pagingStyle->getCurrentSelectedNumber() - 1;
+}
 
 void Pagination::setCurrentPage(int number) {
-    pagingUtil.numberSelected(number);
+    pagingStyle->numberSelected(number);
 }
 
 void Pagination::pageDown() {
-    pagingUtil.numberSelected(pagingUtil.getCurrentSelectedNumber() + 1);
+    pagingStyle->numberSelected(pagingStyle->getCurrentSelectedNumber() + 1);
 }
 
 void Pagination::pageUp() {
-    pagingUtil.numberSelected(pagingUtil.getCurrentSelectedNumber() - 1);
+    pagingStyle->numberSelected(pagingStyle->getCurrentSelectedNumber() - 1);
 }
 
 void Pagination::pageFirst() {
-    pagingUtil.numberSelected(1);
+    pagingStyle->numberSelected(1);
 }
 
 void Pagination::pageLast() {
-    pagingUtil.numberSelected(pagingUtil.getPageSize());
+    pagingStyle->numberSelected(pagingStyle->getPageSize());
 }
 
 
@@ -140,7 +153,7 @@ QSize Pagination::minimumSizeHint() const {
     auto boxSize = getBoxSize();
 
     //calc numbers width
-    auto numbers = pagingUtil.getCurCacheNumbers();
+    auto numbers = pagingStyle->getCurCacheNumbers();
     for (int i = 0; i < numbers.size(); i++) {
         minWidth += boxSize.width();
         minWidth += boxSpacing;
@@ -191,7 +204,7 @@ bool Pagination::event(QEvent* e) {
                 }
             }
 
-            auto numbers = pagingUtil.getCurCacheNumbers();
+            auto numbers = pagingStyle->getCurCacheNumbers();
 
             int pageDownBtnWidth = getPageDownBtnWidth();
             if (pageDownBtnWidth != 0) {
@@ -247,7 +260,7 @@ void Pagination::paintEvent(QPaintEvent* event) {
     auto boxSize = getBoxSize();
     auto top = centerTop(boxSize.height());
 
-    auto numbers = pagingUtil.getCurCacheNumbers();
+    auto numbers = pagingStyle->getCurCacheNumbers();
 
     int pageUpBtnWidth = getPageUpBtnWidth();
     if (pageUpBtnWidth != 0) {
@@ -306,7 +319,7 @@ void Pagination::drawNumber(const QRect& rect, int number, QPainter* painter) {
     opt.text = numberFormat(number);
     opt.rect = rect;
     opt.state.setFlag(QStyle::State_MouseOver, hoverNumber == number);
-    opt.state.setFlag(QStyle::State_Selected, pagingUtil.isSelectedNumber(number));
+    opt.state.setFlag(QStyle::State_Selected, pagingStyle->isSelectedNumber(number));
     style()->drawControl(QStyle::CE_PushButton, &opt, painter, pushButton);
 }
 

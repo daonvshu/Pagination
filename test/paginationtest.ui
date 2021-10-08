@@ -305,7 +305,7 @@ padding:8px;
 background:transparent;
 
 qproperty-spacing: 6;
-qproperty-totalsize: 46;
+qproperty-totalsize: 30;
 qproperty-sizeofperpage: 2;
 }
 Pagination&gt;QPushButton{

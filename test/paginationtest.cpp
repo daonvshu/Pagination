@@ -2,6 +2,8 @@
 
 #include <qlabel.h>
 
+#include "pagingstyle2.h"
+
 PaginationTest::PaginationTest(QWidget* parent): QWidget(parent) {
     ui.setupUi(this);
 
@@ -10,6 +12,8 @@ PaginationTest::PaginationTest(QWidget* parent): QWidget(parent) {
         new QLabel(QString("this is page %1").arg(i + 1), widget);
         ui.page_container->addWidget(widget);
     }
+
+    ui.pagination_4->setPagingStyle(new PagingStyle2);
 }
 
 
