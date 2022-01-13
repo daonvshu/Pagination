@@ -139,6 +139,9 @@ void Pagination::pageLast() {
     pagingStyle->numberSelected(pagingStyle->getPageSize());
 }
 
+int Pagination::getCurrentPageIndex() const {
+    return lastSelectedIndex;
+}
 
 
 QSize Pagination::sizeHint() const {

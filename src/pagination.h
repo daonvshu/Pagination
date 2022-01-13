@@ -52,6 +52,8 @@ public:
     void pageFirst();
     void pageLast();
 
+    int getCurrentPageIndex() const;
+
 signals:
     void pageIndexChanged(int index);
 
