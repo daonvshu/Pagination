@@ -14,8 +14,13 @@ PaginationTest::PaginationTest(QWidget* parent): QWidget(parent) {
     }
 
     ui.pagination_4->setPagingStyle(new PagingStyle2);
+
+    ui.listView->setModel(model = new QStandardItemModel(this));
 }
 
+void PaginationTest::showEvent(QShowEvent* event) {
+    reloadListView();
+}
 
 void PaginationTest::on_pushButton_clicked() {
     ui.pagination->setCurrentPage(ui.lineEdit->text().toInt());
@@ -40,4 +45,17 @@ void PaginationTest::on_pagination_3_pageIndexChanged(int index) {
     ui.pagination->setTotalSize(46);
     ui.pagination_2->setTotalSize(46);
     ui.pagination_3->setTotalSize(46);
+
+    reloadListView();
+}
+
+void PaginationTest::reloadListView() {
+    model->clear();
+
+    int currentPageIndex = ui.pagination_3->getCurrentPageIndex();
+    int pageOffset = currentPageIndex * ui.pagination_3->getSizeofPerPage();
+
+    for (int i=0; i<ui.pagination_3->getSizeofPerPage(); i++) {
+        model->appendRow(new QStandardItem(QString("item %1").arg(pageOffset + i + 1)));
+    }
 }
