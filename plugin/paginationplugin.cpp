@@ -62,5 +62,5 @@ QString PaginationPlugin::domXml() const {
 }
 
 QString PaginationPlugin::includeFile() const {
-    return "Pagination.h";
+    return "pagination.h";
 }
