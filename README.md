@@ -136,16 +136,14 @@ Note: The `curCacheNumbers` stored numbers for display, or -1 if it's an ellipsi
 |`spacing`|spacing between buttons|getBoxSpacing/setBoxSpacing|
 |`totalsize`|all of display item size|getTotalSize/getTotalSize|
 |`sizeofperpage`|size of one page|getSizeofPerPage/setSizeofPerPage|
-|`pageUpEnable`|visibility of left page button|isPageUpEnabled/setPageUpEnable|
 |`pageUpText`|left page button display text|getPageUpText/setPageUpText|
-|`pageDownEnable`|visibility of right page button|isPageDownEnabled/setPageDownEnable|
 |`pageDownText`|right page button display text|getPageDownText/setPageDownText|
 
 build the plugin(`pagination_plugin.dll`) project, and use `pagination` widget in `Qt Designer`  
 ![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/designer.drawio.png?raw=true)  
 
 configure properties in `Qt Designer` property window  
-![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/designer-property.drawio.png?raw=true)  
+![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/designer-property.png?raw=true)  
 
 what's means of this properties:  
 ![image](https://github.com/daonvshu/Pagination/blob/master/screenshot/display.drawio.png?raw=true)  
