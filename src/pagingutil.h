@@ -6,7 +6,7 @@ class PagingUtil : public QObject {
     Q_OBJECT
 
 public:
-    PagingUtil(QObject* parent = nullptr);
+    explicit PagingUtil(QObject* parent = nullptr);
     virtual ~PagingUtil();
 
     int getTotalSize() const;
@@ -49,4 +49,6 @@ protected:
 
 private:
     void pre2ReCacheNumbers();
+
+    friend class Pagination;
 };

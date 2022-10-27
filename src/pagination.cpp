@@ -12,9 +12,8 @@
 Pagination::Pagination(QWidget* parent)
     : QFrame(parent)
     , pagingStyle(nullptr)
-    , boxSpacing(0)
-    , pageUpEnable(true)
-    , pageDownEnable(true)
+    , lastSelectedIndex(0)
+    , boxSpacing(6)
     , pageUpText("<")
     , pageDownText(">")
     , pageUpPressed(false)
@@ -27,6 +26,7 @@ Pagination::Pagination(QWidget* parent)
     pushButton->setVisible(false);
 
     setPagingStyle(new PagingStyle1);
+    pagingStyle->pre2ReCacheNumbers();
 }
 
 Pagination::~Pagination() {
@@ -60,12 +60,7 @@ void Pagination::setSizeofPerPage(int size) {
 }
 
 bool Pagination::isPageUpEnabled() const {
-    return pageUpEnable;
-}
-
-void Pagination::setPageUpEnable(bool enable) {
-    pageUpEnable = enable;
-    updateGeometry();
+    return !pageUpText.isEmpty();
 }
 
 QString Pagination::getPageUpText() const {
@@ -78,12 +73,7 @@ void Pagination::setPageUpText(const QString& text) {
 }
 
 bool Pagination::isPageDownEnabled() const {
-    return pageDownEnable;
-}
-
-void Pagination::setPageDownEnable(bool enable) {
-    pageDownEnable = enable;
-    updateGeometry();
+    return !pageDownText.isEmpty();
 }
 
 QString Pagination::getPageDownText() const {
@@ -99,6 +89,7 @@ void Pagination::setPageDownText(const QString& text) {
 void Pagination::setPagingStyle(PagingUtil* pagingStyle) {
     delete this->pagingStyle;
     this->pagingStyle = pagingStyle;
+    pagingStyle->pre2ReCacheNumbers();
 
     connect(pagingStyle, &PagingUtil::numberArraySizeChanged, [&] {
         updateGeometry();
@@ -175,7 +166,11 @@ bool Pagination::event(QEvent* e) {
     if (e->type() == QEvent::HoverMove || e->type() == QEvent::MouseButtonPress || e->type() == QEvent::MouseButtonRelease) {
         QPoint mousePos;
         if (e->type() == QEvent::HoverMove) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             mousePos = dynamic_cast<QHoverEvent*>(e)->pos();
+#else
+            mousePos = dynamic_cast<QHoverEvent*>(e)->position().toPoint();
+#endif
         } else {
             mousePos = dynamic_cast<QMouseEvent*>(e)->pos();
         }
@@ -363,7 +358,7 @@ QSize Pagination::getBoxSize() const {
     auto met = fontMetrics();
 
     int l, t, r, b;
-    getContentsMargins(&l, &t, &r, &b);
+    readContentMargins(l, t, r, b);
 
     int boxWidth = l + r + met.height();
     int boxHeight = t + b + met.height();
@@ -372,29 +367,53 @@ QSize Pagination::getBoxSize() const {
 }
 
 int Pagination::getPageUpBtnWidth() const {
-    if (!pageUpEnable) {
+    if (!isPageUpEnabled()) {
         return 0;
     }
 
     int l, t, r, b;
-    getContentsMargins(&l, &t, &r, &b);
+    readContentMargins(l, t, r, b);
 
     auto met = fontMetrics();
-    return qMax(t + b + met.height(), met.width(pageUpText) + l + r);
+    return qMax(t + b + met.height(),
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+                met.width(pageUpText) + l + r
+#else
+                met.horizontalAdvance(pageUpText) + l + r
+#endif
+                );
 }
 
 int Pagination::getPageDownBtnWidth() const {
-    if (!pageDownEnable) {
+    if (!isPageDownEnabled()) {
         return 0;
     }
 
     int l, t, r, b;
-    getContentsMargins(&l, &t, &r, &b);
+    readContentMargins(l, t, r, b);
 
     auto met = fontMetrics();
-    return qMax(t + b + met.height(), met.width(pageDownText) + l + r);
+    return qMax(t + b + met.height(),
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+                met.width(pageDownText) + l + r
+#else
+                met.horizontalAdvance(pageDownText) + l + r
+#endif
+                );
 }
 
 int Pagination::centerTop(int boxHeight) const {
     return (height() - boxHeight) / 2;
+}
+
+void Pagination::readContentMargins(int& l, int& t, int& r, int& b) const {
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    getContentsMargins(&l, &t, &r, &b);
+#else
+    auto margins = contentsMargins();
+    l = margins.left();
+    t = margins.top();
+    r = margins.right();
+    b = margins.bottom();
+#endif
 }

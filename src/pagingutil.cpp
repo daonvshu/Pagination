@@ -2,11 +2,11 @@
 
 PagingUtil::PagingUtil(QObject* parent)
     : QObject(parent)
-    , totalSize(0)
-    , sizeofPerPage(1)
+    , totalSize(10)
+    , sizeofPerPage(2)
     , curSelectNumber(1)
 {
-    
+
 }
 
 PagingUtil::~PagingUtil() {
