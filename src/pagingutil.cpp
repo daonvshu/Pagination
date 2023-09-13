@@ -12,6 +12,13 @@ PagingUtil::PagingUtil(QObject* parent)
 PagingUtil::~PagingUtil() {
 }
 
+PagingUtil &PagingUtil::operator=(const PagingUtil &other) {
+    this->totalSize = other.totalSize;
+    this->sizeofPerPage = other.sizeofPerPage;
+    this->curSelectNumber = other.curSelectNumber;
+    return *this;
+}
+
 int PagingUtil::getTotalSize() const {
     return totalSize;
 }

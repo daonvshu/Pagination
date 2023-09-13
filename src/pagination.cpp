@@ -87,9 +87,14 @@ void Pagination::setPageDownText(const QString& text) {
 
 
 void Pagination::setPagingStyle(PagingUtil* pagingStyle) {
+    //copy data from old style
+    if (this->pagingStyle != nullptr) {
+        *pagingStyle = *this->pagingStyle;
+    }
+    //remove old style util
     delete this->pagingStyle;
     this->pagingStyle = pagingStyle;
-    pagingStyle->pre2ReCacheNumbers();
+    this->pagingStyle->pre2ReCacheNumbers();
 
     connect(pagingStyle, &PagingUtil::numberArraySizeChanged, [&] {
         updateGeometry();

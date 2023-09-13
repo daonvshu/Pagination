@@ -313,10 +313,6 @@ font-size:16px;
 font-family:&quot;Microsoft YaHei UI&quot;;
 padding:8px;
 background:transparent;
-
-qproperty-spacing: 6;
-qproperty-totalsize: 30;
-qproperty-sizeofperpage: 2;
 }
 Pagination&gt;QPushButton{
 border-radius:4px;
@@ -339,6 +335,12 @@ Pagination&gt;QPushButton:pressed{
 color:white;
 background:#1ABC9C;
 }</string>
+        </property>
+        <property name="totalsize" stdset="0">
+         <number>30</number>
+        </property>
+        <property name="sizeofperpage" stdset="0">
+         <number>3</number>
         </property>
        </widget>
       </item>
@@ -367,7 +369,7 @@ background:#1ABC9C;
   <customwidget>
    <class>Pagination</class>
    <extends>QFrame</extends>
-   <header>Pagination.h</header>
+   <header>pagination.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

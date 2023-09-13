@@ -9,6 +9,8 @@ public:
     explicit PagingUtil(QObject* parent = nullptr);
     virtual ~PagingUtil();
 
+    PagingUtil& operator=(const PagingUtil& other);
+
     int getTotalSize() const;
     void setTotalSize(int size);
 
